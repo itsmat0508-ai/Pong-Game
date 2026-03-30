@@ -1,0 +1,13 @@
+Right-click your project name in the Solution Explorer and select Properties. Change the "Configuration" to All Configurations and "Platform" to x64.
+
+Header Files: Go to C/C++ -> General -> Additional Include Directories. Add: $(ProjectDir)..\raylib\include
+
+Library Files: Go to Linker -> General -> Additional Library Directories. Add: $(ProjectDir)..\raylib\lib
+
+Dependencies: Go to Linker -> Input -> Additional Dependencies. Add these lines:
+
+raylib.lib
+winmm.lib
+gdi32.lib
+user32.lib
+shell32.lib

@@ -1,0 +1,171 @@
+Raylib Notes
+-----------------------------------------------------------------------------------------
+1. Window Management:-
+
+-InitWindow
+Syntax     : void InitWindow(int width, int height, const char *title);
+Parameters : width (pixels), height (pixels), title (text).
+Working    : Opens the main game window and sets its dimensions and name.
+
+
+-SetTargetFPS
+Syntax     : void SetTargetFPS(int fps);
+Parameters : fps (frames per second).
+Working    : Limits the game speed to a specific frame rate so it runs smoothly on all hardware.
+
+
+-WindowShouldClose
+Syntax      : bool WindowShouldClose(void);
+Parameters  : None.
+Working     : Checks if the user has requested to close the window (via the 'X' button or ESC key).
+
+
+-CloseWindow
+Syntax      : void CloseWindow(void);
+Parameters  : None.
+Working     : Properly shuts down the window and cleans up memory.
+
+
+-GetScreenWidth / GetScreenHeight
+Syntax      : int GetScreenWidth(void); / int GetScreenHeight(void);
+Parameters  : None.
+Working     : Returns the current width or height of the game window.
+
+-----------------------------------------------------------------------------------------
+
+2. The Drawing Loop:-
+
+-BeginDrawing
+Syntax      : void BeginDrawing(void);
+Parameters  : None.
+Working     : Starts the rendering process for the current frame.
+
+
+-ClearBackground
+Syntax      : void ClearBackground(Color color);
+Parameters  : color (The background color).
+Working     : Clears the screen with a solid color to prepare for new shapes.
+
+
+-EndDrawing
+Syntax     : void EndDrawing(void);
+Parameters : None.
+Working    : Finishes drawing and displays the result on the screen.
+
+-----------------------------------------------------------------------------------------
+
+3. Rendering Shapes & Text:-
+
+-DrawCircle
+Syntax      : void DrawCircle(int centerX, int centerY, float radius, Color color);
+Parameters  : centerX, centerY (position), radius (size), color.
+Working     : Draws a solid circle on the screen.
+
+
+-DrawRectangle
+Syntax     : void DrawRectangle(int posX, int posY, int width, int height, Color color);
+Parameters : posX, posY (top-left corner), width, height, color.
+Working    : Draws a solid rectangle.
+
+
+-DrawRectangleRounded
+Syntax     : void DrawRectangleRounded(Rectangle rec, float roundness, int segments, Color color);
+Parameters : rec (Rectangle object), roundness (0 to 1), segments (smoothness), color.
+Working    : Draws a rectangle with rounded edges for a modern look.
+
+
+-DrawLine
+Syntax     : void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color);
+Parameters : startPosX, startPosY (start point), endPosX, endPosY (end point), color.
+Working    : Draws a straight line between two coordinates.
+
+
+-DrawText
+Syntax: void DrawText(const char *text, int posX, int posY, int fontSize, Color color);
+Parameters : text(string), posX, posY (position), fontSize, color.
+Working    : Renders words or numbers onto the screen.
+
+-----------------------------------------------------------------------------------------
+
+4. Logic, Input & Utility:-
+
+-IsKeyDown
+Syntax     : bool IsKeyDown(int key);
+Parameters : key (e.g., KEY_W, KEY_UP).
+Working    : Returns true as long as the specified key is being held down.
+
+-IsKeyPressed
+Syntax  : bool IsKeyPressed(int key);
+Working : Unlike IsKeyDown (which repeats every frame), this only returns true once when the key is first pressed. This is perfect for toggling features like your Bot mode (KEY_C).
+
+-GetRandomValue
+Syntax	   : int GetRandomValue(int min, int max);
+Parameters : min(lowest possible), max(highest possible).
+Working    : Generates a random integer within a specific range.
+
+
+-TextFormat
+Syntax     : const char* TextFormat(const char* text, ...)
+Parameters : text (base string), ... (variables like integers).
+Working    : Formats text and variables into a single string (similar to `printf`).
+
+-MeasureText
+Syntax  : int MeasureText(const char *text, int fontSize);
+Working : Returns the width of a string in pixels based on the font size. Essential for centering text on the screen.
+
+TextFormat (Updated Detail)
+Syntax  : const char *TextFormat(const char *text, ...);
+Working : Allows you to combine strings and variables (like score) into one piece of text for drawing.
+
+-CheckCollisionCircleRec
+Syntax     : bool CheckCollisionCircleRec(Vector2 center, float radius, Rectangle rec);
+Parameters : center (Ball position), radius, rec (Paddle area).
+Working    : Returns true if the circle and rectangle are touching.
+
+-RectangleDefinition: 
+Syntax  : Rectangle myRec = { x, y, width, height };
+Working : A structure that stores the position (top-left corner) and size of a box.
+
+-Vector2:
+Syntax  : Vector2 position = { x, y };
+Working : Groups two floats (X and Y) together. Required for circle-based collisions and drawing.
+-----------------------------------------------------------------------------------------
+
+5. Color System:-
+
+-Color Struct
+Syntax  : Color myColor = { r, g, b, a };
+Values  : Red (0-255), Green (0-255), Blue (0-255), Alpha (0-255).
+Working : Defines a custom color using RGBA values.
+-----------------------------------------------------------------------------------------
+
+6. Audio Management:-
+
+-InitAudioDevice
+
+Syntax  : void InitAudioDevice(void);
+Working : Initializes the audio device and context. Must be called before loading any sounds.
+
+-LoadSound
+Syntax  : Sound LoadSound(const char *fileName);
+Working : Loads a sound file (e.g., .mp3, .wav) into memory.
+
+-PlaySound
+Syntax  : void PlaySound(Sound sound);
+Working : Plays a loaded sound once.
+
+-UnloadSound
+Syntax  : void UnloadSound(Sound sound);
+Working : Frees the memory allocated for a sound. Always call this before the program ends.
+
+-CloseAudioDevice
+Syntax  : void CloseAudioDevice(void);
+Working : Shuts down the audio device and context.
+-----------------------------------------------------------------------------------------
+
+7. Time & Timing Logic:-
+
+-GetFrameTime
+Syntax  : float GetFrameTime(void);
+Working : Returns the time in seconds it took to process the last frame (Delta Time). Useful for timers (e.g., timer -= GetFrameTime()).
+-----------------------------------------------------------------------------------------

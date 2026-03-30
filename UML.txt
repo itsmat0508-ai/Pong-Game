@@ -1,0 +1,66 @@
+classDiagram
+    class Paddle {
+        -float X_axis
+        -float Y_axis
+        -float width
+        -float height
+        -int pixel
+        +Paddle(float x, float y, float width, float height, int pixel)
+        +int getPixel()
+        +float getHeight()
+        +float getWidth()
+        +float getX_axis()
+        +float getY_axis()
+        +void setPixel(int pixel)
+        +void setHeight(float height)
+        +void setWidth(float width)
+        +void setX_axis(float x)
+        +void setY_axis(float y)
+        +void draw(Color color)
+        +void update(int keyUp, int keyDown)
+        +Rectangle getRec()
+    }
+
+    class Bot {
+        +Bot(float x, float y, float width, float height, int pixel)
+        +void update(int ball_y_axis)
+    }
+
+    class Ball {
+        -float X_axis
+        -float Y_axis
+        -float pixel_x
+        -float pixel_y
+        -int radius
+        -float resetTimer
+        +Ball(float x, float y, float pix_x, float pix_y, int radius)
+        +float getX_axis()
+        +float getY_axis()
+        +float getPixel_x()
+        +float getPixel_y()
+        +int getRadius()
+        +void setX_axis(float x)
+        +void setY_axis(float y)
+        +void setPixel_x(float pix_x)
+        +void setPixel_y(float pix_y)
+        +void setRadius(int radius)
+        +void draw(Color color)
+        +void resetBall()
+        +void update(Player& p1, Player& p2, int& targetFps, Sound& wallhit, Sound& goal)
+    }
+
+    class Player {
+        -string name
+        -int score
+        +Player(string name, int score)
+        +void setName(string name)
+        +void setScore(int score)
+        +string getName()
+        +int getScore()
+        +void incScore()
+        +void print(int posX, int posY, int fontSize, Color color)
+    }
+
+    Relationships
+    Paddle <|-- Bot : Inheritance
+    Ball ..> Player : Dependency/Association (Updates Scores)
